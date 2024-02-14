@@ -1,15 +1,45 @@
-import {conf} from './conf/config'
+import { Header,Footer } from './Components/index'
+import React,{useState,useEffect} from 'react';
+import {useDispatch} from 'react-redux'
+import AuthServObj from './appwrite/auth'
+import {login,logout} from './store/authSlice'
 import './App.css'
 
 function App() {
-  
-
-  return (
-    <>
-      <h1 className='bg-red-500 p-5'>Hello Welcome to the Puri's Blog Project</h1>
-      {
-        console.log(conf)
+  const [Loading, setLoading] = useState(true);
+  const dispatch=useDispatch();
+  useEffect(()=>{
+    AuthServObj.getCurrentUser()
+    .then((userData)=>{
+      if(userData){
+        dispatch(login({userData}))
       }
+      else{
+        dispatch(logout())
+      }
+    })
+    .finally(
+      setLoading(false)
+    )
+  },[])
+
+  return !Loading ?
+  (
+    <>
+      <div className='bg-red flex justify-center items-center h-screen'>
+        Hey I am Not Loading
+        <Header/>
+        <main>
+          outlet
+        </main>
+        <Footer/>
+      </div>
+    </>
+  )
+  :
+  (
+    <>
+    Loading....
     </>
   )
 }
