@@ -4,6 +4,11 @@ import Container from './Container/container'
 import Logo from "./Logo";
 import LogoutBtn from './Header/LogoutBtn'
 import Button from './Button'
+import Select from "./select";
+import Postcard from "./postcard";
+import Login from "./login";
+import Input from "./input"
+import Signup from "./Signup"
 
 export {
     Header,
@@ -11,5 +16,12 @@ export {
     Container,
     Logo,
     LogoutBtn,
-    Button
+    Button,
+    Select,
+    Postcard,
+    Login,
+    Input,
+    Signup,
+
+    
 }
