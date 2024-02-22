@@ -9,6 +9,8 @@ import Postcard from "./postcard";
 import Login from "./login";
 import Input from "./input"
 import Signup from "./Signup"
+import RTE from "./RTE"
+import Postform from "./PostForm/postform";
 
 export {
     Header,
@@ -22,6 +24,6 @@ export {
     Login,
     Input,
     Signup,
-
-    
+    RTE,
+    Postform,
 }
