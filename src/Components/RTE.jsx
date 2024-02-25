@@ -2,7 +2,7 @@ import React from 'react';
 import {Editor} from '@tinymce/tinymce-react'
 import {Controller} from 'react-hook-form'
 
-export default RTE = ({name,control,label,
+const RTE = ({name,control,label,
         defaultValue=''}) => {
     return (
         <div className='w-full'>
@@ -53,4 +53,4 @@ export default RTE = ({name,control,label,
     );
 }
 
-
+export default RTE;

@@ -11,6 +11,7 @@ import Input from "./input"
 import Signup from "./Signup"
 import RTE from "./RTE"
 import Postform from "./PostForm/postform";
+import Protected from "./authLayout"
 
 export {
     Header,
@@ -26,4 +27,5 @@ export {
     Signup,
     RTE,
     Postform,
+    Protected
 }

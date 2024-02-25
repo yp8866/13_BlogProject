@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useForm} from "react-hook-form";
 
 
-export default Postform = ({post}) => {
+const Postform = ({post}) => {
     const {register,handlesubmit,control,watch,setValue,getValues} = useForm({
         defaultValues:{
             title:post?.title||"",
@@ -128,3 +128,5 @@ export default Postform = ({post}) => {
         </form>
     );
 }
+
+export default Postform;
