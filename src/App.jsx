@@ -4,10 +4,12 @@ import {useDispatch} from 'react-redux'
 import AuthServObj from './appwrite/auth'
 import {login,logout} from './store/authSlice'
 import './App.css'
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const [Loading, setLoading] = useState(true);
   const dispatch=useDispatch();
+  
   useEffect(()=>{
     AuthServObj.getCurrentUser()
     .then((userData)=>{
@@ -25,23 +27,16 @@ function App() {
 
   return !Loading ?
   (
-    <>
-      <div className='bg-red flex justify-center items-center h-screen'>
-        Hey I am Not Loading
-        <Header/>
+    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+      <div className='w-full block'>
+        <Header />
         <main>
-          outlet
+        <Outlet />
         </main>
-        <Footer/>
+        <Footer />
       </div>
-    </>
-  )
-  :
-  (
-    <>
-    Loading....
-    </>
-  )
+    </div>
+  ) : null
 }
 
 export default App

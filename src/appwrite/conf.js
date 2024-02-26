@@ -9,11 +9,12 @@ export class StorageService{
     constructor(){
         this.client
             .setEndpoint(conf.appwriteUrl)
-            .setEndpoint(conf.appwriteProjectId);
+            .setEndpoint(conf.appwriteProjectId)
 
         this.databases = new Databases(this.client);
         this.bucket= new Storage(this.client);
 
+        // console.log("The url is : ",typeof(conf.appwriteUrl),"-->",`${conf.appwriteUrl}`);
 
     }
 

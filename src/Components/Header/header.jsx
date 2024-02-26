@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-    const authStatus=useSelector((state)=>
-        state.auth.status
-    )
+    // const authStatus=useSelector((state)=>
+    //     state.auth.status
+    // )
+    const authStatus=false;
     const navigate=useNavigate();
 
     const navItems=[
@@ -20,12 +21,12 @@ const Header = () => {
         {
             name: 'Login',
             url: '/login',
-            active: authStatus
+            active: !authStatus
         },
         {
             name:'Signup',
             url: '/signup',
-            active: authStatus
+            active: !authStatus
         },
         {
             name:'All Posts',
@@ -39,8 +40,8 @@ const Header = () => {
         }
     ]
     return (
-        <header className='py-3 shadow bg-gray-800 text-white' >
-            <Container>
+        <header className='py-3 shadow bg-gray-600 text-white' >
+           <Container>
                 <nav className='flex'>
                     <div className='mr-4'>
                         <Link to='/'>

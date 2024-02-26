@@ -22,7 +22,7 @@ const Protected = ({children,authentication=true}) => {
     
     
     
-    return loader? <h1>Loading...</h1> : {children};
+    return loader?( <h1>Loading...</h1>) : ({...children});
 }
 
 export default Protected;

@@ -6,7 +6,7 @@ const Input = React.forwardRef( function Input({
     className='',
     ...props
 },ref){
-    id=useId()
+    const id=useId()
     return (
         <div className='w-full'>
             {
