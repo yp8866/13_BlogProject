@@ -9,14 +9,13 @@ export class StorageService{
     constructor(){
         this.client
             .setEndpoint(conf.appwriteUrl)
-            .setEndpoint(conf.appwriteProjectId)
-
+            .setProject(conf.appwriteProjectId)
         this.databases = new Databases(this.client);
         this.bucket= new Storage(this.client);
-
-        // console.log("The url is : ",typeof(conf.appwriteUrl),"-->",`${conf.appwriteUrl}`);
-
     }
+
+    
+
 
     async createPost({title,slug,content,featured_image,status,userId}){
         try {
