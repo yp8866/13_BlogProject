@@ -20,7 +20,7 @@ const Login = () => {
                 const userdata= await AuthServObj.getCurrentUser()
                 if(userdata){
                     dispatch(authLogin(userdata))
-                    navigate("/")
+                    navigate("/all-posts")
                 }
             }
         } catch (error) {

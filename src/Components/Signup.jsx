@@ -16,8 +16,8 @@ const Signup = () => {
     const create= async (data)=>{
         seterror("");
         try {
-            const userData= await AuthServObj.createAccount(data);
-            if(userData){
+            const datta= await AuthServObj.createAccount(data);
+            if(datta){
                 const userData=AuthServObj.getCurrentUser();
                 if(userData)
                     dispatch(login(userData));

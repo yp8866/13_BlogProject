@@ -1,13 +1,13 @@
-import React,{useCallback,useEffect} from 'react';
-import {Input,Button,RTE,Logo,Select} from ".."
+import React,{useCallback,useEffect, useState} from 'react';
+import {Input,Button,RTE,Select} from ".."
 import { useNavigate } from 'react-router-dom';
 import StorageServiceObj from "../../appwrite/conf"
-import { useDispatch, useSelector } from 'react-redux';
+import {useSelector } from 'react-redux';
 import {useForm} from "react-hook-form";
 
 
 const Postform = ({post}) => {
-    const {register,handlesubmit,control,watch,setValue,getValues} = useForm({
+    const {register,handleSubmit,control,watch,setValue,getValues} = useForm({
         defaultValues:{
             title:post?.title||"",
             slug:post?.slug||"",
@@ -17,9 +17,11 @@ const Postform = ({post}) => {
     });
     const navigate=useNavigate();
     const userData= useSelector((state)=>state.auth.userData)
+    const [working, setworking] = useState(false);
 
     const submit= async (data)=>{
         //edit the post
+        setworking(true);
         if(post){
             const file= data.image[0] ? await StorageServiceObj.FileUpload(data.image[0]) : null;
             if(file){
@@ -28,6 +30,7 @@ const Postform = ({post}) => {
 
             const dbpost= await StorageServiceObj.UpdatePost(post.$id,{...data,featured_image:file?file.$id:undefined})
             if(dbpost){
+                setworking(false);
                 navigate(`/post/${dbpost.$id}`)
             }
         }
@@ -35,10 +38,10 @@ const Postform = ({post}) => {
         else{
             const file= data.image[0]? await StorageServiceObj.FileUpload(data.image[0]) : null;
             if(file){
-                const fileid=file.$id;
-                data.featured_image=fileid;
-                const dbpost= await StorageServiceObj.UpdatePost({...data,userData:userData.$id})
+                const fileid=file.$id;                
+                const dbpost= await StorageServiceObj.createPost({...data,userId:userData.$id,featured_image:fileid})
                 if(dbpost){
+                    setworking(false);
                     navigate(`/post/${dbpost.$id}`)
                 }
             }
@@ -67,7 +70,7 @@ const Postform = ({post}) => {
     },[watch,slugTransform,setValue])
 
     return (
-        <form onSubmit={handlesubmit(submit)} className='flex flex-wrap'>
+        <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
             <div className='w-2/3 px-2'>
                 <Input
                     label="Title: "
@@ -92,6 +95,7 @@ const Postform = ({post}) => {
                     control={control}
                     defaultValue={getValues("content")}
                 />
+                
 
             </div>
             <div className='w-1/3 px-2'>
@@ -121,7 +125,7 @@ const Postform = ({post}) => {
                 bgColor={post?'bg-green-500': undefined}
                 className='w-full'
             >
-                {post? "Update" : "Submit"}
+                {post? working? "Updating" :"Update" : working? "Submitting": "Submit"}
             </Button>
             </div>
             

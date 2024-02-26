@@ -25,12 +25,12 @@ const Post = () => {
         else navigate("/")
 
     },[slug,navigate])
-
     const deletePost= ()=>{
         StorageServiceObj.DeletePost(post.$id).then((status)=>{
             if(status){
-                StorageServiceObj.DeleteFile(post.featuredImage)
-                navigate("/")
+                StorageServiceObj.DeleteFile(post.featured_image).then((data)=>(
+                    navigate("/")
+                ))
             }
         })
     }
@@ -41,9 +41,9 @@ const Post = () => {
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
-                        src={StorageServiceObj.getFilePreview(post.featuredImage)}
+                        src={StorageServiceObj.GetFilePreview(post.featured_image)}
                         alt={post.title}
-                        className="rounded-xl"
+                        className="rounded-xl w-1/3 h-1/3"
                     />
 
                     {isAuthor && (
